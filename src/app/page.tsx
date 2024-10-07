@@ -7,46 +7,20 @@ export default function Home() {
           {/* Navbar */}
 
           {/* Hero Section */}
-          <section className="mt-16 bg-gray-200 h-64 flex items-center">
-              <div className="container mx-auto text-center">
-                  <h2 className="text-3xl font-bold">Welcome to My Website</h2>
-                  <p className="mt-2 text-gray-600">This is a simple hero section using Tailwind CSS.</p>
-                  <a href="#" className="mt-4 inline-block bg-blue-500 text-white px-6 py-2 rounded">Get Started</a>
-              </div>
-          </section>
-
-          {/* About Section */}
-          <section className="py-16 bg-white">
-              <div className="container mx-auto text-center">
-                  <h3 className="text-2xl font-semibold">About Us</h3>
-                  <p className="mt-4 text-gray-600">We are committed to providing the best service possible. Our team is
-                      dedicated to your success!</p>
-              </div>
-          </section>
-
-          {/* Services Section */}
-          <section className="py-16 bg-gray-200">
-              <div className="container mx-auto text-center">
-                  <h3 className="text-2xl font-semibold">Our Services</h3>
-                  <ul className="mt-4 text-gray-600">
-                      <li>✔️ Service One</li>
-                      <li>✔️ Service Two</li>
-                      <li>✔️ Service Three</li>
-                  </ul>
-              </div>
-          </section>
-
-          {/* Contact Section */}
-          <section className="py-16 bg-white">
-              <div className="container mx-auto text-center">
-                  <h3 className="text-2xl font-semibold">Contact Us</h3>
-                  <p className="mt-4 text-gray-600">Feel free to reach out to us anytime!</p>
-                  <a href="#" className="mt-4 inline-block bg-blue-500 text-white px-6 py-2 rounded">Get in Touch</a>
+          <section className="min-h-screen bg-gray-200 flex items-center justify-center">
+              <div className="text-center">
+                  <h2 className="text-4xl font-semibold mb-4 text-gray-800">Search for a Recipe</h2>
+                  <input
+                      type="text"
+                      placeholder="Search..."
+                      className="w-96 p-2 border border-gray-400 rounded focus:outline-none focus:ring-2
+                      focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out"
+                  />
               </div>
           </section>
 
           {/* Footer */}
-          <footer className="bg-blue-500 p-4 text-center text-white mt-4">
+          <footer className="bg-blue-500 p-4 text-center text-white mt-4 fixed bottom-0 w-full">
               <p>&copy; 2024 My Website. All rights reserved.</p>
           </footer>
       </div>
