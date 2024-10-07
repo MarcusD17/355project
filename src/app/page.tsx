@@ -1,6 +1,3 @@
-import Navbar from "@/app/ui/navbar";
-import NavbarIcon from "@/app/ui/navbar-icons";
-
 export default function Home() {
   return (
       <div className="bg-gray-100">
