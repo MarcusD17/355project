@@ -1,18 +1,25 @@
 'use client';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 export default function SearchForm() {
     const [searchQuery, setSearchQuery] = useState('');
     const router = useRouter();
+    const pathname = usePathname();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         const query = searchQuery.trim();
         if (query) {
-            router.push(`recipes/recipe-search?query=${encodeURIComponent(query)}`);
+            // If on the recipe-search page, replace the current URL
+            if (pathname === '/recipes/recipe-search') {
+                router.replace(`/recipes/recipe-search?query=${encodeURIComponent(query)}`);
+            } else {
+                // For other pages, navigate to the recipe search page
+                router.push(`recipes/recipe-search?query=${encodeURIComponent(query)}`);
+            }
         }
     };
 
