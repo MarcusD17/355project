@@ -41,15 +41,27 @@ async function seedRecipes() {
       name VARCHAR(255) NOT NULL,
       description TEXT NOT NULL,
       preparation_time INT NOT NULL,
-      cooking_time INT NOT NULL
+      cooking_time INT NOT NULL,
+      user_id UUID,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      image_url TEXT
     );
   `;
 
     const insertedRecipes = await Promise.all(
         recipes.map(
             (recipe) => client.sql`
-        INSERT INTO recipes (id, name, description, preparation_time, cooking_time)
-        VALUES (${recipe.id}, ${recipe.name}, ${recipe.description}, ${recipe.preparation_time}, ${recipe.cooking_time})
+        INSERT INTO recipes (id, name, description, preparation_time, cooking_time, user_id, created_at, image_url)
+        VALUES (
+            ${recipe.id}, 
+            ${recipe.name}, 
+            ${recipe.description}, 
+            ${recipe.preparation_time}, 
+            ${recipe.cooking_time}, 
+            ${recipe.user_id}, 
+            ${recipe.created_at}, 
+            ${recipe.image_url}
+        )
         ON CONFLICT (id) DO NOTHING;
       `,
         ),
