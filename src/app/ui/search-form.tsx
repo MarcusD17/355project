@@ -16,7 +16,11 @@ export default function SearchForm() {
             // If on the recipe-search page, replace the current URL
             if (pathname === '/recipes/recipe-search') {
                 router.replace(`/recipes/recipe-search?query=${encodeURIComponent(query)}`);
-            } else {
+            }
+            else if (pathname.startsWith('/recipes/') && pathname !== '/recipes/recipe-search') {
+                router.replace('/recipes/recipe-search');
+            }
+            else {
                 // For other pages, navigate to the recipe search page
                 router.push(`recipes/recipe-search?query=${encodeURIComponent(query)}`);
             }
