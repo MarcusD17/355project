@@ -4,13 +4,12 @@ import { RiAccountCircleLine } from "react-icons/ri";
 import { RiShoppingCartLine } from "react-icons/ri";
 import Link from 'next/link';
 import { BiLogoStripe } from "react-icons/bi";
-import NavLinks from './recipes/nav-link';
+import NavLinks from './recipes/nav-links';
 
 
 export default function Navbar() {
     return (
-        <div className="fixed left-0 right-0 w-15 m-5 p-3 flex bg-blue-500 rounded-lg shadow-2xl
-        text-white ">
+        <div className="fixed left-0 right-0 w-full m-5 p-3 flex bg-blue-500 rounded-lg shadow-2xl text-white">
             <div className="flex items-center mr-auto">
 
                 <i className="mr-4">
