@@ -22,7 +22,7 @@ export default async function RecipePage({ params }: { params: { id: string } })
             {/* Navbar */}
             <div className="flex items-center justify-between gap-2 md:mt-8">
                 <h1 className="text-xl md:text-2xl">Another Recipe?</h1>
-                <SearchForm />
+                <SearchForm/>
             </div>
 
             {/* Recipe Content */}
@@ -81,7 +81,7 @@ export default async function RecipePage({ params }: { params: { id: string } })
             </div>
 
             {/* Footer */}
-            <footer className="bg-blue-500 p-4 text-center text-white mt-16 fixed bottom-0 w-full">
+            <footer className="bg-blue-500 p-4 text-center text-white mt-16 absolute bottom-0 left-0 right-0">
                 <p>&copy; 2024 My Website. All rights reserved.</p>
             </footer>
         </main>
