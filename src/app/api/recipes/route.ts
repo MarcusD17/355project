@@ -2,29 +2,45 @@ import { sql } from '@vercel/postgres';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
-    try {
-        // Parse the incoming JSON data
-        const { name, description, ingredients, instructions } = await req.json();
+    const client = await sql.connect();
 
-        // Validate input data
-        if (!name || !description || !Array.isArray(ingredients) || !instructions) {
+    try {
+        const {
+            name,
+            description,
+            preparation_time,
+            cooking_time,
+            user_id,
+            image_url,
+            instructions,
+            ingredients_list
+        } = await req.json();
+
+        // Validate input
+        if (!name || !description || !preparation_time || !cooking_time || !instructions || !Array.isArray(ingredients_list)) {
             return NextResponse.json({ error: 'Invalid input data' }, { status: 400 });
         }
 
-        // Convert ingredients array to JSON string
-        const ingredientsString = JSON.stringify(ingredients);
-
-        // Insert the new recipe into the database
-        await sql`
-            INSERT INTO recipes (name, description, ingredients_list, instructions)
-            VALUES (${name}, ${description}, ${ingredientsString}, ${instructions})
+        // Insert into database
+        await client.sql`
+            INSERT INTO recipes (name, description, preparation_time, cooking_time, user_id, image_url, instructions, ingredients_list)
+            VALUES (
+                ${name}, 
+                ${description}, 
+                ${preparation_time}, 
+                ${cooking_time}, 
+                ${user_id}, 
+                ${image_url || null}, 
+                ${instructions}, 
+                ARRAY[${ingredients_list.map(ingredient => `'${ingredient}'`).join(', ')}]::TEXT[]
+            )
         `;
 
-        // Return success response
         return NextResponse.json({ message: 'Recipe added successfully!' });
     } catch (error) {
-        // Log and return an error response
         console.error('Error adding recipe:', error);
         return NextResponse.json({ error: 'Failed to add recipe' }, { status: 500 });
+    } finally {
+        client.release();
     }
 }
