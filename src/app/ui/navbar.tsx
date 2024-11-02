@@ -1,7 +1,7 @@
 import NavbarIcon from "@/app/ui/navbar-icons";
 import LogoIcon from "@/app/ui/logo-icons";
-import { RiAccountCircleLine } from "react-icons/ri";
-import { RiShoppingCartLine } from "react-icons/ri";
+// import { RiAccountCircleLine } from "react-icons/ri";
+// import { RiShoppingCartLine } from "react-icons/ri";
 import Link from 'next/link';
 import { BiLogoStripe } from "react-icons/bi";
 import NavLinks from './recipes/nav-links';
