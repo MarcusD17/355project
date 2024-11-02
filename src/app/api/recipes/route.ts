@@ -2,9 +2,13 @@ import { sql } from '@vercel/postgres';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
-    const client = await sql.connect();
-
+    let client;
     try {
+        // Connect to the database
+        client = await sql.connect();
+        console.log("Connected to the database successfully.");
+
+        // Parse and log incoming data
         const {
             name,
             description,
@@ -16,12 +20,17 @@ export async function POST(req: Request) {
             ingredients_list
         } = await req.json();
 
+        console.log("Received data:", {
+            name, description, preparation_time, cooking_time, user_id, image_url, instructions, ingredients_list
+        });
+
         // Validate input
         if (!name || !description || !preparation_time || !cooking_time || !instructions || !Array.isArray(ingredients_list)) {
+            console.error("Validation failed: Missing or invalid input data.");
             return NextResponse.json({ error: 'Invalid input data' }, { status: 400 });
         }
 
-        // Insert into database
+        // Insert the new recipe into the database
         await client.sql`
             INSERT INTO recipes (name, description, preparation_time, cooking_time, user_id, image_url, instructions, ingredients_list)
             VALUES (
@@ -35,12 +44,13 @@ export async function POST(req: Request) {
                 ARRAY[${ingredients_list.map(ingredient => `'${ingredient}'`).join(', ')}]::TEXT[]
             )
         `;
+        console.log("Recipe added successfully.");
 
         return NextResponse.json({ message: 'Recipe added successfully!' });
     } catch (error) {
-        console.error('Error adding recipe:', error);
+        console.error("Error adding recipe:", error);
         return NextResponse.json({ error: 'Failed to add recipe' }, { status: 500 });
     } finally {
-        client.release();
+        if (client) client.release();
     }
 }
