@@ -64,3 +64,48 @@ export async function fetchRecipesPages(query: string) {
         throw new Error('Failed to fetch total number of recipes.');
     }
 }
+
+export async function fetchRecipeById(id: string) {
+    try {
+        const data = await sql`
+            SELECT 
+                recipes.*,
+                recipes.instructions,
+                recipes.ingredients_list,
+                users.name as author_name,
+                users.email as author_email
+            FROM recipes
+            LEFT JOIN users ON recipes.user_id = users.id
+            WHERE recipes.id = ${id}
+        `;
+
+
+        const recipe = data.rows[0];
+        console.log('Fetched recipe:', recipe);
+
+        if (!recipe) {
+            throw new Error('Recipe not found');
+        }
+
+        // Ensure all properties match the Recipe type
+        return {
+            id: recipe.id,
+            name: recipe.name,
+            description: recipe.description,
+            page_description: recipe.page_description,
+            preparation_time: recipe.preparation_time,
+            cooking_time: recipe.cooking_time,
+            user_id: recipe.user_id,
+            created_at: recipe.created_at,
+            image_url: recipe.image_url,
+            ingredients_list: Array.isArray(recipe.ingredients_list) ? recipe.ingredients_list : [],
+            instructions: recipe.instructions,
+            author_name: recipe.author_name,
+            author_email: recipe.author_email
+        };
+
+    } catch (error) {
+        console.error('Failed to fetch recipe:', error);
+        throw new Error('Failed to fetch recipe');
+    }
+}

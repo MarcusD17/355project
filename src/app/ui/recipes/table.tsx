@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from 'next/link';
+
 import {fetchFilteredRecipes} from "@/app/lib/data";
 
 
@@ -32,6 +34,7 @@ export default async function RecipesTable({
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                 {recipes.map((recipe) => (
+
                     <tr
                         key={recipe.id}
                         className="hover:bg-gray-50 transition-colors relative h-16"
@@ -49,6 +52,13 @@ export default async function RecipesTable({
                         }}
                     >
                         <td className="px-6 py-4 text-sm text-gray-900 relative z-10">
+                            <Link
+                                href={`/recipes/${recipe.id}`}
+                                className="absolute inset-0 z-10"
+                                aria-label={`View ${recipe.name} recipe`}
+                            >
+                                <span className="sr-only">View recipe details</span>
+                            </Link>
                             {recipe.name}
                             <div className="text-xs text-gray-500">
                                 Prep: {recipe.preparation_time}min | Cook: {recipe.cooking_time}min

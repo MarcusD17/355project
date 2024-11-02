@@ -13,17 +13,16 @@ export type Recipe = {
     id: string;
     name: string;
     description: string;
+    page_description?: string;
     preparation_time: number;
     cooking_time: number;
-    ingredients: string;
     user_id: string;
-    created_at: string;
-    image_url: string;
-    author_name: string;
-    author_email: string;
-    // In TypeScript, this is called a string union type.
-    // It means that the "status" property can only be one of the two strings: 'pending' or 'paid'.
-    // {/* status: 'pending' | 'paid'; */}
+    created_at: Date;
+    image_url: string | null;
+    ingredients_list: string[];
+    instructions: string;
+    author_name?: string;
+    author_email?: string;
 };
 
 export type Ingriedents = {

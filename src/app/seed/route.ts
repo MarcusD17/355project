@@ -44,14 +44,16 @@ async function seedRecipes() {
       cooking_time INT NOT NULL,
       user_id UUID,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      image_url TEXT
+      image_url TEXT,
+      instructions TEXT NOT NULL, 
+      ingredients_list TEXT[] NOT NULL
     );
   `;
 
     const insertedRecipes = await Promise.all(
         recipes.map(
             (recipe) => client.sql`
-        INSERT INTO recipes (id, name, description, preparation_time, cooking_time, user_id, created_at, image_url)
+        INSERT INTO recipes (id, name, description, preparation_time, cooking_time, user_id, created_at, image_url, instructions, ingredients_list)
         VALUES (
             ${recipe.id}, 
             ${recipe.name}, 
@@ -60,7 +62,9 @@ async function seedRecipes() {
             ${recipe.cooking_time}, 
             ${recipe.user_id}, 
             ${recipe.created_at}, 
-            ${recipe.image_url}
+            ${recipe.image_url},
+            ${recipe.instructions}, 
+            ARRAY[${recipe.ingredients_list.map(ingredient => `'${ingredient}'`).join(', ')}]::TEXT[]
         )
         ON CONFLICT (id) DO NOTHING;
       `,
@@ -69,6 +73,7 @@ async function seedRecipes() {
 
     return insertedRecipes;
 }
+
 
 async function seedIngredients() {
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
