@@ -17,7 +17,7 @@ const links = [
     { name: 'Home', href: '/', icon: HomeIcon },
     { name: 'Recipes', href: '/recipes/recipe-search', icon: DocumentDuplicateIcon },
     { name: 'Add Recipe', href: '/recipes/new-recipe', icon: DocumentDuplicateIcon },
-    { name: 'About Us', href: '/', icon: UserGroupIcon },
+    { name: 'About Us', href: '/about', icon: UserGroupIcon },
 ];
 
 
