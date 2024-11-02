@@ -11,10 +11,13 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'Invalid input data' }, { status: 400 });
         }
 
+        // Convert ingredients array to JSON string
+        const ingredientsString = JSON.stringify(ingredients);
+
         // Insert the new recipe into the database
         await sql`
             INSERT INTO recipes (name, description, ingredients_list, instructions)
-            VALUES (${name}, ${description}, ${ingredients}, ${instructions})
+            VALUES (${name}, ${description}, ${ingredientsString}, ${instructions})
         `;
 
         // Return success response
