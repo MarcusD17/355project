@@ -1,3 +1,4 @@
+// app/recipes/[id]/page.tsx
 import SearchForm from "@/app/ui/search-form";
 import { fetchRecipeById } from "@/app/lib/data"; // You'll need to create this function
 import { unstable_noStore as noStore } from 'next/cache';
@@ -21,7 +22,7 @@ export default async function RecipePage({ params }: { params: { id: string } })
             {/* Navbar */}
             <div className="flex items-center justify-between gap-2 md:mt-8">
                 <h1 className="text-xl md:text-2xl">Another Recipe?</h1>
-                <SearchForm/>
+                <SearchForm />
             </div>
 
             {/* Recipe Content */}

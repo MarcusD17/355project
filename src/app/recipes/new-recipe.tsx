@@ -1,3 +1,4 @@
+// app/recipes/new-recipe.tsx
 'use client';
 
 import { useState } from 'react';
@@ -8,10 +9,32 @@ export default function NewRecipePage() {
     const [ingredients, setIngredients] = useState('');
     const [instructions, setInstructions] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // example submission logic
-        console.log({ recipeName, description, ingredients, instructions });
+
+        try {
+            const response = await fetch('/api/recipes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: recipeName,
+                    description,
+                    ingredients: ingredients.split(','),
+                    instructions,
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to add recipe.');
+            }
+
+            alert('Recipe added successfully!');
+        } catch (error) {
+            console.error('Error adding recipe:', error);
+            alert('Error adding recipe.');
+        }
     };
 
     return (
@@ -25,6 +48,7 @@ export default function NewRecipePage() {
                         value={recipeName}
                         onChange={(e) => setRecipeName(e.target.value)}
                         className="w-full border rounded p-2"
+                        required
                     />
                 </div>
                 <div>
@@ -33,14 +57,16 @@ export default function NewRecipePage() {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         className="w-full border rounded p-2"
+                        required
                     />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium">Ingredients</label>
+                    <label className="block text-sm font-medium">Ingredients (comma-separated)</label>
                     <textarea
                         value={ingredients}
                         onChange={(e) => setIngredients(e.target.value)}
                         className="w-full border rounded p-2"
+                        required
                     />
                 </div>
                 <div>
@@ -49,6 +75,7 @@ export default function NewRecipePage() {
                         value={instructions}
                         onChange={(e) => setInstructions(e.target.value)}
                         className="w-full border rounded p-2"
+                        required
                     />
                 </div>
                 <button type="submit" className="bg-blue-500 text-white p-2 rounded">

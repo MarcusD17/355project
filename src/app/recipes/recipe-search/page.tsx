@@ -1,4 +1,4 @@
-// app/recipes/page.tsx
+// app/recipes/recipe-search/page.tsx
 import { Suspense } from 'react';
 import RecipesTable from '@/app/ui/recipes/table';
 import { fetchRecipesPages } from '@/app/lib/data';
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default async function Page({
     searchParams,
-    }: {
+}: {
     searchParams?: {
         query?: string;
         page?: string;
