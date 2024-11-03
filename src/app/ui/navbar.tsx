@@ -14,7 +14,6 @@ export default function Navbar() {
                         <LogoIcon icon={<GiChefToque size="48" />} />
                     </Link>
                 </i>
-
             </div>
             <NavLinks />
 

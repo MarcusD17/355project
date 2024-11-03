@@ -31,7 +31,7 @@ export default async function Page({
         <main className="w-full max-w-7xl mx-auto p-4 md:p-6 mt-16">
             <div className="flex items-center justify-between gap-2 md:mt-8">
                 <h1 className="text-xl md:text-2xl">Search Results</h1>
-                <SearchForm />
+                <SearchForm/>
                 {query && (
                     <p className="text-sm text-gray-600">
                         Showing results for: {query}
@@ -40,12 +40,17 @@ export default async function Page({
             </div>
 
             <Suspense fallback={<div>Loading...</div>}>
-                <RecipesTable query={query} currentPage={currentPage} />
+                <RecipesTable query={query} currentPage={currentPage}/>
             </Suspense>
 
             <div className="mt-5 flex w-full justify-center">
-                <Pagination totalPages={totalPages} />
+                <Pagination totalPages={totalPages}/>
             </div>
+            <footer
+                className="bg-blue-500/90 backdrop-blur-sm p-4 text-center text-white absolute left-0 bottom-0 w-full z-50">
+                <p>&copy; 2024 My Website. Jahid Hasan, Marcus Dawodu, Michael Pan. All rights reserved.</p>
+            </footer>
         </main>
+
     );
 }

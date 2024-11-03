@@ -81,8 +81,9 @@ export default async function RecipePage({ params }: { params: { id: string } })
             </div>
 
             {/* Footer */}
-            <footer className="bg-blue-500 p-4 text-center text-white mt-16 absolute bottom-0 left-0 right-0">
-                <p>&copy; 2024 My Website. All rights reserved.</p>
+            <footer
+                className="bg-blue-500/90 backdrop-blur-sm p-4 text-center text-white absolute left-0 bottom-0 w-full z-50">
+                <p>&copy; 2024 My Website. Jahid Hasan, Marcus Dawodu, Michael Pan. All rights reserved.</p>
             </footer>
         </main>
     );
