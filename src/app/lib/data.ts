@@ -3,7 +3,11 @@ import { Recipe } from './definitions';
 
 const ITEMS_PER_PAGE = 6;
 
-export async function fetchFilteredRecipes(query: string, currentPage: number) {
+// Function to fetch filtered recipes with pagination
+export async function fetchFilteredRecipes(
+    query: string,
+    currentPage: number,
+) {
     const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
     try {
@@ -31,13 +35,14 @@ export async function fetchFilteredRecipes(query: string, currentPage: number) {
             LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
         `;
 
-        return recipes.rows;
+        return recipes.rows; // Use .rows to access the results
     } catch (error) {
         console.error('Database Error:', error);
         throw new Error('Failed to fetch recipes.');
     }
 }
 
+// Function to fetch the total number of pages for the given query
 export async function fetchRecipesPages(query: string) {
     try {
         const count = await sql`
@@ -60,6 +65,7 @@ export async function fetchRecipesPages(query: string) {
     }
 }
 
+// Function to fetch a recipe by its ID
 export async function fetchRecipeById(id: string) {
     try {
         const data = await sql`
@@ -74,11 +80,14 @@ export async function fetchRecipeById(id: string) {
             WHERE recipes.id = ${id}
         `;
 
-        const recipe = data.rows[0];
+        const recipe = data.rows[0]; // Use .rows to access the results
+        console.log('Fetched recipe:', recipe);
+
         if (!recipe) {
             throw new Error('Recipe not found');
         }
 
+        // Ensure all properties match the Recipe type
         return {
             id: recipe.id,
             name: recipe.name,
@@ -92,7 +101,7 @@ export async function fetchRecipeById(id: string) {
             ingredients_list: Array.isArray(recipe.ingredients_list) ? recipe.ingredients_list : [],
             instructions: recipe.instructions,
             author_name: recipe.author_name,
-            author_email: recipe.author_email,
+            author_email: recipe.author_email
         };
     } catch (error) {
         console.error('Failed to fetch recipe:', error);
@@ -100,34 +109,32 @@ export async function fetchRecipeById(id: string) {
     }
 }
 
-// New method to add a recipe
-export async function addRecipe(recipeData: {
+// Function to add a new recipe
+export async function addRecipe(newRecipe: {
     name: string;
     description: string;
     preparation_time: number;
     cooking_time: number;
     user_id: string;
-    image_url?: string;
+    image_url: string;
     ingredients_list: string[];
     instructions: string;
 }) {
-    const { name, description, preparation_time, cooking_time, user_id, image_url, ingredients_list, instructions } = recipeData;
-
     try {
         await sql`
-            INSERT INTO recipes (name, description, preparation_time, cooking_time, user_id, image_url, ingredients_list, instructions)
-            VALUES (
-                ${name},
-                ${description},
-                ${preparation_time},
-                ${cooking_time},
-                ${user_id},
-                ${image_url || null},
-                ${sql.array(ingredients_list)},
-                ${instructions}
+            INSERT INTO recipes (
+                name, description, preparation_time, cooking_time, user_id, image_url, ingredients_list, instructions
+            ) VALUES (
+                ${newRecipe.name},
+                ${newRecipe.description},
+                ${newRecipe.preparation_time},
+                ${newRecipe.cooking_time},
+                ${newRecipe.user_id},
+                ${newRecipe.image_url},
+                ${JSON.stringify(newRecipe.ingredients_list)}, -- Convert array to string
+                ${newRecipe.instructions}
             )
         `;
-
         return { message: 'Recipe added successfully' };
     } catch (error) {
         console.error('Failed to add recipe:', error);
