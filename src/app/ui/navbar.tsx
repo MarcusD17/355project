@@ -1,6 +1,6 @@
 import LogoIcon from "@/app/ui/logo-icons";
 import Link from 'next/link';
-import { BiLogoStripe } from "react-icons/bi";
+import { GiChefToque } from "react-icons/gi";
 import NavLinks from './recipes/nav-links';
 
 
@@ -11,7 +11,7 @@ export default function Navbar() {
 
                 <i className="mr-4">
                     <Link href="/">
-                        <LogoIcon icon={<BiLogoStripe size="28" />} />
+                        <LogoIcon icon={<GiChefToque size="48" />} />
                     </Link>
                 </i>
 

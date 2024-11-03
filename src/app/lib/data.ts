@@ -42,6 +42,8 @@ export async function fetchFilteredRecipes(
     }
 }
 
+
+
 // Function to fetch the total number of pages for the given query
 export async function fetchRecipesPages(query: string) {
     try {
@@ -109,50 +111,4 @@ export async function fetchRecipeById(id: string) {
     }
 }
 
-// Function to add a new recipe
-export async function addRecipe(recipe: {
-    name: string;
-    description: string;
-    preparation_time: number;
-    cooking_time: number;
-    user_id: string;
-    image_url: string;
-    ingredients_list: string[];
-    instructions: string;
-}) {
-    try {
-        // Ensure all properties are present
-        const { name, description, preparation_time, cooking_time, user_id, image_url, ingredients_list, instructions } = recipe;
 
-        // Convert the ingredients list to a string that PostgreSQL can interpret as an array
-        const ingredientsArray = `{${ingredients_list.map((item) => `"${item}"`).join(',')}}`;
-
-        // Insert the recipe into the database
-        await sql`
-            INSERT INTO recipes (
-                name,
-                description,
-                preparation_time,
-                cooking_time,
-                user_id,
-                image_url,
-                ingredients_list,
-                instructions
-            ) VALUES (
-                ${name},
-                ${description},
-                ${preparation_time},
-                ${cooking_time},
-                ${user_id},
-                ${image_url},
-                ${ingredientsArray}::text[],
-                ${instructions}
-            )
-        `;
-
-        return { message: 'Recipe added successfully' };
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to add recipe');
-    }
-}

@@ -10,9 +10,13 @@ export const metadata: Metadata = {
     title: 'Recipes',
 };
 
+// Add dynamic configuration
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function Page({
-    searchParams,
-}: {
+                                       searchParams,
+                                   }: {
     searchParams?: {
         query?: string;
         page?: string;
