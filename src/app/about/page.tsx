@@ -6,10 +6,10 @@ export default function AboutPage() {
     return (
         <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-6">
             <div className="max-w-4xl mx-auto p-8 mt-24 text-center">
-                {/* Title */}
+
                 <h1 className="text-5xl font-bold text-blue-600 mb-6 animate-fadeIn">About Us</h1>
 
-                {/* Description */}
+
                 <p className="text-lg text-gray-800 mb-4 animate-fadeIn delay-200">
                     Welcome to our recipe-sharing community! We’re passionate about making cooking accessible and enjoyable for everyone.
                 </p>
@@ -21,7 +21,7 @@ export default function AboutPage() {
                     Join us and explore a world of culinary inspiration. Let's cook something amazing together!
                 </p>
 
-                {/* Image Section */}
+
                 <div className="mt-8">
                     <img
                         src="https://raw.githubusercontent.com/MarcusD17/355project/refs/heads/master/src/app/public/images/recipeBook.jpg"  // Replace with your image path
@@ -30,7 +30,7 @@ export default function AboutPage() {
                     />
                 </div>
 
-                {/* Call to Action */}
+
                 <div className="mt-10">
                     <a
                         href="/recipes/recipe-search"
