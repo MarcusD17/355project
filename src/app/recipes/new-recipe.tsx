@@ -1,95 +1,127 @@
 'use client';
 
 import { useState } from 'react';
+import { addRecipe } from '@/app/lib/data'; // Import the addRecipe function
 
 export default function NewRecipePage() {
-    const [recipeData, setRecipeData] = useState({
-        name: '',
-        description: '',
-        preparation_time: 0,
-        cooking_time: 0,
-        user_id: '', // Update this as needed
-        image_url: '',
-        instructions: '',
-        ingredients_list: ['']
-    });
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, field: string) => {
-        setRecipeData({ ...recipeData, [field]: e.target.value });
-    };
-
-    const handleArrayChange = (index: number, value: string) => {
-        const newIngredients = [...recipeData.ingredients_list];
-        newIngredients[index] = value;
-        setRecipeData({ ...recipeData, ingredients_list: newIngredients });
-    };
+    const [recipeName, setRecipeName] = useState('');
+    const [description, setDescription] = useState('');
+    const [preparationTime, setPreparationTime] = useState(0);
+    const [cookingTime, setCookingTime] = useState(0);
+    const [imageURL, setImageURL] = useState('');
+    const [ingredients, setIngredients] = useState('');
+    const [instructions, setInstructions] = useState('');
+    const [message, setMessage] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        const ingredientsList = ingredients.split(',').map((item) => item.trim());
+
         try {
-            console.log("Submitting recipe data:", recipeData);
-            const response = await fetch('/api/recipes', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(recipeData)
+            // Temporary user ID for testing
+            const userId = '410544b2-4001-4271-9855-fec4b6a6442a';
+
+            const response = await addRecipe({
+                name: recipeName,
+                description,
+                preparation_time: preparationTime,
+                cooking_time: cookingTime,
+                user_id: userId,
+                image_url: imageURL,
+                ingredients_list: ingredientsList,
+                instructions,
             });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error("Failed to add recipe:", errorData);
-                throw new Error(errorData.error || 'Failed to add recipe');
-            }
-
-            alert('Recipe added successfully!');
+            setMessage(response.message);
+            // Clear the form after successful submission
+            setRecipeName('');
+            setDescription('');
+            setPreparationTime(0);
+            setCookingTime(0);
+            setImageURL('');
+            setIngredients('');
+            setInstructions('');
         } catch (error) {
-            console.error('Error adding recipe:', error);
-            alert('An error occurred while adding the recipe.');
+            console.error('Failed to add recipe:', error);
+            setMessage('Failed to add recipe');
         }
     };
 
     return (
-        <div className="max-w-4xl mx-auto p-4">
+        <div className="max-w-4xl mx-auto p-4 mt-8">
             <h1 className="text-2xl font-bold mb-4">Add a New Recipe</h1>
+            {message && <p className="text-red-500 mb-4">{message}</p>}
             <form onSubmit={handleSubmit} className="space-y-4">
-                <input
-                    type="text"
-                    placeholder="Recipe Name"
-                    onChange={(e) => handleChange(e, 'name')}
-                    className="w-full border rounded p-2"
-                />
-                <textarea
-                    placeholder="Description"
-                    onChange={(e) => handleChange(e, 'description')}
-                    className="w-full border rounded p-2"
-                />
-                <input
-                    type="number"
-                    placeholder="Preparation Time"
-                    onChange={(e) => handleChange(e, 'preparation_time')}
-                    className="w-full border rounded p-2"
-                />
-                <input
-                    type="number"
-                    placeholder="Cooking Time"
-                    onChange={(e) => handleChange(e, 'cooking_time')}
-                    className="w-full border rounded p-2"
-                />
-                <textarea
-                    placeholder="Instructions"
-                    onChange={(e) => handleChange(e, 'instructions')}
-                    className="w-full border rounded p-2"
-                />
-                {recipeData.ingredients_list.map((ingredient, index) => (
+                <div>
+                    <label className="block text-sm font-medium">Recipe Name</label>
                     <input
-                        key={index}
                         type="text"
-                        placeholder={`Ingredient ${index + 1}`}
-                        value={ingredient}
-                        onChange={(e) => handleArrayChange(index, e.target.value)}
+                        value={recipeName}
+                        onChange={(e) => setRecipeName(e.target.value)}
+                        className="w-full border rounded p-2"
+                        required
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium">Description</label>
+                    <textarea
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        className="w-full border rounded p-2"
+                        required
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium">Preparation Time (minutes)</label>
+                    <input
+                        type="number"
+                        value={preparationTime}
+                        onChange={(e) => setPreparationTime(Number(e.target.value))}
+                        className="w-full border rounded p-2"
+                        required
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium">Cooking Time (minutes)</label>
+                    <input
+                        type="number"
+                        value={cookingTime}
+                        onChange={(e) => setCookingTime(Number(e.target.value))}
+                        className="w-full border rounded p-2"
+                        required
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium">Image URL</label>
+                    <input
+                        type="text"
+                        value={imageURL}
+                        onChange={(e) => setImageURL(e.target.value)}
                         className="w-full border rounded p-2"
                     />
-                ))}
-                <button type="submit" className="bg-blue-500 text-white p-2 rounded">Submit Recipe</button>
+                </div>
+                <div>
+                    <label className="block text-sm font-medium">Ingredients (comma-separated)</label>
+                    <input
+                        type="text"
+                        value={ingredients}
+                        onChange={(e) => setIngredients(e.target.value)}
+                        className="w-full border rounded p-2"
+                        required
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium">Instructions</label>
+                    <textarea
+                        value={instructions}
+                        onChange={(e) => setInstructions(e.target.value)}
+                        className="w-full border rounded p-2"
+                        required
+                    />
+                </div>
+                <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+                    Submit Recipe
+                </button>
             </form>
         </div>
     );
