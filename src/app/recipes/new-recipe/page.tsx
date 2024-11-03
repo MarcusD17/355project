@@ -48,7 +48,7 @@ export default function NewRecipePage() {
     };
 
     return (
-        <div className="max-w-4xl mx-auto p-4 mt-8">
+        <div className="max-w-4xl mx-auto p-4 mt-24"> {/* Updated 'mt-24' for more top margin */}
             <h1 className="text-2xl font-bold mb-4">Add a New Recipe</h1>
             {message && <p className="text-red-500 mb-4">{message}</p>}
             <form onSubmit={handleSubmit} className="space-y-4">
