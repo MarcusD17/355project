@@ -1,6 +1,7 @@
 'use client';
 
 
+
 export default function AboutPage() {
     return (
         <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-6">
@@ -10,7 +11,7 @@ export default function AboutPage() {
 
 
                 <p className="text-lg text-gray-800 mb-4 animate-fadeIn delay-200">
-                    Welcome to our recipe-sharing community! We’re passionate about making cooking accessible and enjoyable for everyone.
+                    Welcome to our recipe-sharing community! We are passionate about making cooking accessible and enjoyable for everyone.
                 </p>
                 <p className="text-lg text-gray-800 mb-6 animate-fadeIn delay-400">
                     Our platform is designed to help you find delicious recipes quickly, so you can get cooking without any hassle.
@@ -23,7 +24,7 @@ export default function AboutPage() {
 
                 <div className="mt-8">
                     <img
-                        src="https://raw.githubusercontent.com/MarcusD17/355project/refs/heads/master/src/app/public/images/recipeBook.jpg"  // Replace with your image path
+                        src="https://raw.githubusercontent.com/MarcusD17/355project/refs/heads/master/src/app/public/images/recipeBook.jpg"
                         alt="Cooking Inspiration"
                         className="w-full max-w-md rounded-lg shadow-lg animate-fadeInUp"
                     />
