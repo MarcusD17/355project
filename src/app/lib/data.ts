@@ -124,6 +124,9 @@ export async function addRecipe(recipe: {
         // Ensure all properties are present
         const { name, description, preparation_time, cooking_time, user_id, image_url, ingredients_list, instructions } = recipe;
 
+        // Convert the ingredients list to a string that PostgreSQL can interpret as an array
+        const ingredientsArray = `{${ingredients_list.map((item) => `"${item}"`).join(',')}}`;
+
         // Insert the recipe into the database
         await sql`
             INSERT INTO recipes (
@@ -142,7 +145,7 @@ export async function addRecipe(recipe: {
                 ${cooking_time},
                 ${user_id},
                 ${image_url},
-                ${sql.array(ingredients_list)},
+                ${ingredientsArray}::text[],
                 ${instructions}
             )
         `;
