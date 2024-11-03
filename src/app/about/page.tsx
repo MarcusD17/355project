@@ -24,7 +24,7 @@ export default function AboutPage() {
                 {/* Image Section */}
                 <div className="mt-8">
                     <img
-                        src="/public/images/recipeBook.jpg"  // Replace with your image path
+                        src="https://raw.githubusercontent.com/MarcusD17/355project/refs/heads/master/src/app/public/images/recipeBook.jpg"  // Replace with your image path
                         alt="Cooking Inspiration"
                         className="w-full max-w-md rounded-lg shadow-lg animate-fadeInUp"
                     />
