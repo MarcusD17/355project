@@ -110,7 +110,7 @@ export async function fetchRecipeById(id: string) {
 }
 
 // Function to add a new recipe
-export async function addRecipe(newRecipe: {
+export async function addRecipe(recipe: {
     name: string;
     description: string;
     preparation_time: number;
@@ -121,23 +121,35 @@ export async function addRecipe(newRecipe: {
     instructions: string;
 }) {
     try {
+        // Ensure all properties are present
+        const { name, description, preparation_time, cooking_time, user_id, image_url, ingredients_list, instructions } = recipe;
+
+        // Insert the recipe into the database
         await sql`
             INSERT INTO recipes (
-                name, description, preparation_time, cooking_time, user_id, image_url, ingredients_list, instructions
+                name,
+                description,
+                preparation_time,
+                cooking_time,
+                user_id,
+                image_url,
+                ingredients_list,
+                instructions
             ) VALUES (
-                ${newRecipe.name},
-                ${newRecipe.description},
-                ${newRecipe.preparation_time},
-                ${newRecipe.cooking_time},
-                ${newRecipe.user_id},
-                ${newRecipe.image_url},
-                ${JSON.stringify(newRecipe.ingredients_list)}, -- Convert array to string
-                ${newRecipe.instructions}
+                ${name},
+                ${description},
+                ${preparation_time},
+                ${cooking_time},
+                ${user_id},
+                ${image_url},
+                ${sql.array(ingredients_list)},
+                ${instructions}
             )
         `;
+
         return { message: 'Recipe added successfully' };
     } catch (error) {
-        console.error('Failed to add recipe:', error);
+        console.error('Database Error:', error);
         throw new Error('Failed to add recipe');
     }
 }
