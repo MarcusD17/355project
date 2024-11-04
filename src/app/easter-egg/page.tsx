@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import keycodeStyles from '../ui/easter-egg/keycode.module.css'; // Importing keycode styles
 import dadJokesStyles from '../ui/easter-egg/dad-jokes.module.css';
-import Footer from "@/app/ui/footer"; // Importing dad jokes styles
+import kineticStyle from '../ui/easter-egg/kinetic-loader-udemy.module.css'; // Adjust path if needed
+import Footer from "@/app/ui/footer"; // Importing footer styles
 
 // Define the type for key information
 interface KeyInfo {
@@ -58,7 +59,8 @@ export default function EasterEgg() {
     }, []);
 
     return (
-        <div className="min-h-screen flex items-center justify-center text-center">
+
+        <div className={`min-h-screen flex items-center justify-center text-center `}>
             <div id="insert">
                 <div className={keycodeStyles.key}>
                     {keyInfo.key || '\u00A0'} {/* Display non-breaking space */}
@@ -78,8 +80,10 @@ export default function EasterEgg() {
                     <button id="joke-btn" className={`${dadJokesStyles.jokeButton} mt-4`}>Get Another Joke</button>
                 </div>
             </div>
-            <Footer />
-        </div>
+            <div className={kineticStyle.kinetic}>
+            </div>
+                <Footer/>
 
+        </div>
     );
 }
