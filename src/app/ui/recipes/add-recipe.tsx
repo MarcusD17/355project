@@ -19,6 +19,7 @@ export default function RecipeForm() {
                 <input
                     type="text"
                     name="name"
+                    placeholder="Ex. Spaghetti Bolognese"
                     className="w-full p-2 border border-gray-400 rounded focus:outline-none focus:ring-2
                     focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out pl-4"
                     required
@@ -35,6 +36,7 @@ export default function RecipeForm() {
                 <label className="block text-sm font-medium">Description</label>
                 <textarea
                     name="description"
+                    placeholder="Enter Description"
                     className="w-full p-2 border border-gray-400 rounded focus:outline-none focus:ring-2
                     focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out pl-4"
                     required
@@ -86,6 +88,7 @@ export default function RecipeForm() {
                 <input
                     type="text"
                     name="image_url"
+                    placeholder="Enter URL Here"
                     className="w-full p-2 border border-gray-400 rounded focus:outline-none focus:ring-2
                     focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out pl-4"
                     aria-describedby="image-url-error"
@@ -102,6 +105,7 @@ export default function RecipeForm() {
                 <input
                     type="text"
                     name="ingredients_list"
+                    placeholder="Ex. Eggs, Cheese, Flour"
                     className="w-full p-2 border border-gray-400 rounded focus:outline-none focus:ring-2
                     focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out pl-4"
                     required
@@ -118,6 +122,7 @@ export default function RecipeForm() {
                 <label className="block text-sm font-medium">Instructions</label>
                 <textarea
                     name="instructions"
+                    placeholder="Gather all ingredients. Preheat the oven to 350 degrees F (175 degrees C)..."
                     className="w-full p-2 border border-gray-400 rounded focus:outline-none focus:ring-2
                     focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out pl-4"
                     required

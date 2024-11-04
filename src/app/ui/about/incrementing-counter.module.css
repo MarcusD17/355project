@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap');
+
+
+
+.bodyCounterContainer {
+    display: flex; /* Use flexbox */
+    flex-wrap: nowrap; /* Prevent wrapping */
+    justify-content: space-between; /* Space out items evenly */
+    margin: 20px 0; /* Add some vertical margin */
+}
+
+.counterContainer {
+    display: flex; /* Keep items in a row */
+    flex-direction: column; /* Stack icon and text vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text */
+    width: 100px; /* Set a fixed width to prevent wrapping */
+}
+
+.counter {
+    font-size: 4rem; /* Increase the font size for visibility */
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow if it exceeds the container */
+    text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+}
+
+
+@media (max-width: 580px) {
+    .counter-container {
+        flex-direction: column; /* Adjust for mobile view */
+    }
+}
