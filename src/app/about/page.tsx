@@ -5,10 +5,6 @@ import styles from '../ui/about/incrementing-counter.module.css';
 import { FaInstagram } from "react-icons/fa6";
 import { FaYoutube } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
-import { RiTwitterXFill } from "react-icons/ri";
-
-
-
 
 export default function AboutPage() {
     const [activePanel, setActivePanel] = useState(0);
