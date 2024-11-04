@@ -1,19 +1,20 @@
 /* kinetic-loader-udemy.module.css */
 .kinetic {
-    position: fixed; /* Fix it to the viewport */
-    top: 35%;
-    left: 45%;
-    transform: translate(-30%, -30%); /* Center the loader */
-    opacity: 1; /* Start fully visible */
-    transition: opacity 1s ease-in-out; /* Smooth transition for fading */
-    z-index: 1000; /* Ensure it's on top of other elements */
+    position: absolute;
+    top: 30%; /* Changed from 50% to 40% to move it up */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+    z-index: 1000;
+    width: 100px;
+    height: 100px;
 }
 
 .fade-out {
-    opacity: 0; /* Fade to invisible */
+    opacity: 0;
 }
 
-/* Loader styles */
 .kinetic::after,
 .kinetic::before {
     content: '';
@@ -22,8 +23,8 @@
     left: 0;
     width: 0;
     height: 0;
-    border: 50px solid transparent; /* Set the size of the loader */
-    border-bottom-color: black; /* Change to black */
+    border: 50px solid transparent;
+    border-bottom-color: black;
     animation: rotateA 2s linear infinite 0.5s;
 }
 
@@ -32,7 +33,6 @@
     animation: rotateB 2s linear infinite;
 }
 
-/* Keyframes for rotation */
 @keyframes rotateA {
     0%, 25% {
         transform: rotate(0deg);
@@ -54,5 +54,30 @@
     }
     100% {
         transform: rotate(450deg);
+    }
+}
+
+/* Add responsive scaling for different screen sizes */
+@media screen and (max-width: 768px) {
+    .kinetic {
+        width: 80px;
+        height: 80px;
+    }
+
+    .kinetic::after,
+    .kinetic::before {
+        border-width: 40px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .kinetic {
+        width: 60px;
+        height: 60px;
+    }
+
+    .kinetic::after,
+    .kinetic::before {
+        border-width: 30px;
     }
 }
