@@ -1,0 +1,21 @@
+.jokeContainer {
+    min-height: 80px; /* Minimum height for consistency */
+    transition: height 0.2s; /* Optional: Smooth transition */
+}
+
+.jokeText {
+    /* Any specific styles for the joke text */
+}
+
+.jokeButton {
+    background-color: #007BFF; /* Button color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 15px; /* Padding for the button */
+    cursor: pointer; /* Pointer on hover */
+}
+
+.jokeButton:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}

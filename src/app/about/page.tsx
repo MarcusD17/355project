@@ -2,6 +2,7 @@
 
 import {useEffect, useRef, useState} from 'react';
 import styles from '../ui/about/incrementing-counter.module.css';
+import Footer from '../ui/footer';
 import { FaInstagram } from "react-icons/fa6";
 import { FaYoutube } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
@@ -163,11 +164,8 @@ export default function AboutPage() {
                     <li><strong>Michael Pan</strong> - UX Designer & Food Aficionado</li>
                 </ul>
             </section>
+            <Footer />
 
-            <footer
-                className="bg-blue-500/90 backdrop-blur-sm p-4 text-center text-white fixed left-0 bottom-0 w-full z-50">
-                <p>&copy; 2024 My Website. Jahid Hasan, Marcus Dawodu, Michael Pan. All rights reserved.</p>
-            </footer>
         </div>
     );
 }

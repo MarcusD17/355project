@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import SearchForm from "@/app/ui/search-form";
+import Footer from "@/app/ui/footer";
 
 export default function Home() {
     // State to manage the index of the text being displayed
@@ -57,9 +58,7 @@ export default function Home() {
                 </section>
 
                 {/* Footer - Separate z-index to ensure it's always on top */}
-                <footer className="bg-blue-500/90 backdrop-blur-sm p-4 text-center text-white absolute left-0 bottom-0 w-full z-50">
-                    <p>&copy; 2024 My Website. Jahid Hasan, Marcus Dawodu, Michael Pan. All rights reserved.</p>
-                </footer>
+                <Footer />
             </div>
         </div>
     );

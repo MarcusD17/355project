@@ -5,6 +5,7 @@ import { fetchRecipesPages } from '@/app/lib/data';
 import Pagination from '@/app/ui/recipes/pagination';
 import { Metadata } from 'next';
 import SearchForm from "@/app/ui/search-form";
+import Footer from "@/app/ui/footer";
 
 export const metadata: Metadata = {
     title: 'Recipes',
@@ -46,10 +47,7 @@ export default async function Page({
             <div className="mt-5 flex w-full justify-center">
                 <Pagination totalPages={totalPages}/>
             </div>
-            <footer
-                className="bg-blue-500/90 backdrop-blur-sm p-4 text-center text-white absolute left-0 bottom-0 w-full z-50">
-                <p>&copy; 2024 My Website. Jahid Hasan, Marcus Dawodu, Michael Pan. All rights reserved.</p>
-            </footer>
+            <Footer />
         </main>
 
     );
