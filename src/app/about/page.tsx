@@ -57,16 +57,15 @@ export default function AboutPage() {
                 let currentCount = 0;
 
                 const updateCounter = () => {
-                    if (currentCount < target) {
-                        currentCount = Math.ceil(currentCount + increment);
-                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                        // @ts-expect-error
-                        ref.current.innerText = `${currentCount}`;
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                        // @ts-expect-error
-                        ref.current.innerText = target.toString();
+                    // Check if ref is still current before updating
+                    if (ref.current) {
+                        if (currentCount < target) {
+                            currentCount = Math.ceil(currentCount + increment);
+                            ref.current.innerText = `${currentCount}`;
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            ref.current.innerText = target.toString();
+                        }
                     }
                 };
 
@@ -74,6 +73,7 @@ export default function AboutPage() {
             }
         });
     }, []);
+
 
 
 
