@@ -72,7 +72,7 @@ export default function AboutPage() {
             <section className="max-w-4xl mx-auto p-8 space-y-4 mt-8">
                 <p className="text-lg leading-relaxed">
                     Welcome to our recipe entry site! Our mission is to make it easy for food enthusiasts to share and
-                    discover delicious recipes. Whether you're a home cook or a professional chef, our platform is
+                    discover delicious recipes. Whether you are a home cook or a professional chef, our platform is
                     designed to help you find inspiration, save your favorite recipes, and contribute to a growing
                     collection of culinary ideas.
                 </p>
